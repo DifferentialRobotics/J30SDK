@@ -147,11 +147,11 @@ chmod +x mediamtx
 ffmpeg -re -f v4l2 -i /dev/video0 \ #video*为相机占用的端口号
 -c:v libx264 -preset ultrafast -tune zerolatency \
 -b:v 1M \
--f mpegts "tcp://192.168.48.126:8080?listen=1" #ip地址改为主机端ip
+-f mpegts "tcp://192.168.48.126:8080?listen=1" #ip改为J30的ip
 ```
 #### 2.2.2 视频拉流（主机端）
 ```
-ffplay -fflags nobuffer -flags low_delay -framedrop udp://192.168.48.121:8080 #ip地址改为J30的ip
+ffplay -fflags nobuffer -flags low_delay -framedrop udp://192.168.48.126:8080 #ip地址改为J30的ip
 ```
 ### 2.3 使用UDP协议推流/拉流
 #### 2.3.1 视频推流（J30上）
@@ -161,11 +161,11 @@ ffmpeg -re -f v4l2 -i /dev/video0 \ #video*为相机占用的端口号
 -b:v 1M -maxrate 1M -bufsize 2M \
 -g 30 -keyint_min 30 \
 -flags +global_header \
--f mpegts "udp://192.168.48.121:8080?pkt_size=1316" #ip地址改为主机端ip
+-f mpegts "udp://192.168.48.121:8080?pkt_size=1316" #ip改为J30的ip
 ```
 #### 2.3.2 视频拉流（主机端）
 ```    
-ffplay -fflags nobuffer -flags low_delay -framedrop udp://192.168.48.121:8080 #ip地址改为J30的ip
+ffplay -fflags nobuffer -flags low_delay -framedrop udp://192.168.48.121:8080 #ip改为J30的ip
 ```
 
 ### 2.4 webrtc推流（稳定延迟低）
